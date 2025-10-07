@@ -6,7 +6,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/image_encodings.hpp"
 #include "sensor_msgs/msg/image.hpp" // 图像消息类型
-#include <atomic>
 #include <chrono>
 #include <cmath>
 #include <cstdio>
@@ -177,7 +176,7 @@ class HikCameraNode : public rclcpp::Node
         // qos.transient_local();
         pub_ = this->create_publisher<sensor_msgs::msg::Image>("cameraraw", 10);
         // 使用固定 100 Hz 的定时器来轮询并发布（帧率由相机内部控制）
-        constexpr double fixed_hz = 100.0;
+        constexpr double fixed_hz = 150.0;
         auto period = std::chrono::duration<double>(1.0 / fixed_hz);
         timer_ = this->create_wall_timer(period, std::bind(&HikCameraNode::on_publish, this));
     }
@@ -292,18 +291,18 @@ class HikCameraNode : public rclcpp::Node
         auto msg = cv_bridge::CvImage(header, encoding, frame).toImageMsg();
         pub_->publish(*msg);
 
-        // 成功发布后统计 FPS（基于发布次数，而非订阅者消费）
-        ++publish_count_;
+        // 记录最近帧的尺寸
+        last_frame_width_ = imageData.width;
+        last_frame_height_ = imageData.height;
+
         auto now = this->now();
         auto elapsed = now - last_fps_time_;
         if (elapsed.seconds() >= 1.0)
         {
-            unsigned int count = publish_count_.load();
-            double fps = static_cast<double>(count) / elapsed.seconds();
-            RCLCPP_INFO(this->get_logger(), "publish fps: %.2f (count=%u, elapsed=%.2fs)", fps, count,
-                        elapsed.seconds());
-            // reset
-            publish_count_.store(0);
+            // 从 SDK 读取相机内部报告的帧率
+            double camera_fps = static_cast<double>(cam.GetFrameRate());
+            RCLCPP_INFO(this->get_logger(), "camera reported fps: %.2f Hz, frame size: %ux%u (elapsed %.2fs)",
+                        camera_fps, last_frame_width_, last_frame_height_, elapsed.seconds());
             last_fps_time_ = now;
         }
     }
@@ -402,15 +401,16 @@ class HikCameraNode : public rclcpp::Node
     bool trigger_mode_ = false;
     rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr pub_;
     rclcpp::TimerBase::SharedPtr timer_;
-    double frame_rate_ = 20.0;
+    double frame_rate_ = 200.0;
     unsigned int pixel_format_ = PixelType_Gvsp_BGR8_Packed;
     std::string frame_id_ = "hik_camera_optical_frame";
     bool settings_applied_ = false;
     bool last_open_attempt_valid_ = false;
     rclcpp::Time last_open_attempt_;
     const double reconnect_interval_sec_ = 1.0;
-    std::atomic_uint publish_count_{0};
     rclcpp::Time last_fps_time_;
+    unsigned int last_frame_width_ = 0;
+    unsigned int last_frame_height_ = 0;
     //参数回调句柄
     rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr param_cb_handle_;
 };

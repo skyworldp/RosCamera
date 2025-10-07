@@ -1,5 +1,6 @@
 #include "HikCamera.h"
 #include "PixelType.h"
+#include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <cstring>
@@ -62,37 +63,51 @@ bool HikCamera::SetFrameRate(float fps)
         return false;
     }
 
-    float targetFps = fps;
-    MVCC_FLOATVALUE attr;
-    int ret = MV_CC_GetFloatValue(m_handle, "AcquisitionFrameRate", &attr);
-    if (ret == MV_OK)
+    // 尝试开启帧率控制开关
+    int ret = MV_CC_SetBoolValue(m_handle, "AcquisitionFrameRateEnable", true);
+    if (ret != MV_OK)
     {
-        if (targetFps < attr.fMin)
+        // 某些机型使用枚举形式
+        ret = MV_CC_SetEnumValue(m_handle, "AcquisitionFrameRateEnable", 1);
+        if (ret != MV_OK)
         {
-            targetFps = attr.fMin;
-        }
-        if (targetFps > attr.fMax)
-        {
-            targetFps = attr.fMax;
+            std::cerr << "HikCamera Warning: enable AcquisitionFrameRate failed (error code: 0x" << std::hex << ret
+                      << std::dec << ")" << std::endl;
         }
     }
 
-    ret = MV_CC_SetBoolValue(m_handle, "AcquisitionFrameRateEnable", true);
+    // 关闭自动帧率（如果支持）
+    ret = MV_CC_SetEnumValue(m_handle, "AcquisitionFrameRateAuto", 0);
     if (ret != MV_OK)
     {
-        std::cerr << "HikCamera Warning: enable AcquisitionFrameRate failed (error code: 0x" << std::hex << ret
-                  << std::dec << ")" << std::endl;
+        // 某些型号不支持该属性，忽略即可
     }
 
-    ret = MV_CC_SetFloatValue(m_handle, "AcquisitionFrameRate", targetFps);
+    ret = MV_CC_SetFloatValue(m_handle, "AcquisitionFrameRate", fps);
     if (ret != MV_OK)
     {
-        SetError("Set frame rate failed", ret);
-        return false;
+        // 如果设置失败，查询限制后再夹取
+        MVCC_FLOATVALUE limits;
+        if (MV_CC_GetFloatValue(m_handle, "AcquisitionFrameRate", &limits) == MV_OK)
+        {
+            float clamped = std::clamp(fps, limits.fMin, limits.fMax);
+            if (std::fabs(clamped - fps) > 0.1f)
+            {
+                std::cerr << "HikCamera Warning: requested frame rate " << fps << " fps is outside camera limits ("
+                          << limits.fMin << "-" << limits.fMax << "), clamped to " << clamped << " fps" << std::endl;
+            }
+            ret = MV_CC_SetFloatValue(m_handle, "AcquisitionFrameRate", clamped);
+        }
+
+        if (ret != MV_OK)
+        {
+            SetError("Set frame rate failed", ret);
+            return false;
+        }
     }
 
     MVCC_FLOATVALUE current;
-    float applied = targetFps;
+    float applied = fps;
     ret = MV_CC_GetFloatValue(m_handle, "ResultingFrameRate", &current);
     if (ret == MV_OK)
     {
