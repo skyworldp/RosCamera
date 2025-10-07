@@ -1,2 +1,0 @@
-Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
-Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24

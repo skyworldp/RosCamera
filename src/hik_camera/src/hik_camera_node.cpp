@@ -8,7 +8,9 @@
 #include "sensor_msgs/msg/image.hpp" // 图像消息类型
 #include <atomic>
 #include <chrono>
+#include <cmath>
 #include <cstdio>
+#include <iomanip>
 #include <memory>
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -24,7 +26,7 @@ class HikCameraNode : public rclcpp::Node
         : Node("hik_camera_node", options)
     {
         RCLCPP_INFO(this->get_logger(), "HikCameraNode 已构建");
-        constexpr double default_frame_rate = 20.0;
+        constexpr double default_frame_rate = 200.0;
         constexpr unsigned int default_pixel_format = PixelType_Gvsp_BGR8_Packed;
         // 声明参数并设置默认值
         this->declare_parameter<double>("exposure_time", 2000.0);
@@ -125,7 +127,25 @@ class HikCameraNode : public rclcpp::Node
                             frame_rate_ = previous;
                             continue;
                         }
-                        frame_rate_ = v;
+                        double applied = static_cast<double>(cam.GetFrameRate());
+                        if (applied > 0.0)
+                        {
+                            frame_rate_ = applied;
+                            RCLCPP_INFO(this->get_logger(), "帧率参数已更新: 请求=%.2f Hz, 实际=%.2f Hz", v, applied);
+
+                            if (std::fabs(applied - v) > 0.1)
+                            {
+                                std::ostringstream info;
+                                info << std::fixed << std::setprecision(2);
+                                info << "帧率实际应用为 " << applied << " Hz (请求 " << v << " Hz)";
+                                append_reason(info.str());
+                            }
+                        }
+                        else
+                        {
+                            frame_rate_ = v;
+                            RCLCPP_INFO(this->get_logger(), "帧率参数已更新: 请求=%.2f Hz", v);
+                        }
                     }
                     else if (param_name == "pixel_format")
                     {
@@ -154,7 +174,6 @@ class HikCameraNode : public rclcpp::Node
 
         // 创建 publisher：发布相机图像
         // rclcpp::QoS qos(rclcpp::KeepLast(5));
-        // qos.reliable();
         // qos.transient_local();
         pub_ = this->create_publisher<sensor_msgs::msg::Image>("cameraraw", 10);
         // 使用固定 100 Hz 的定时器来轮询并发布（帧率由相机内部控制）
@@ -175,6 +194,42 @@ class HikCameraNode : public rclcpp::Node
     {
 
         const auto throttle_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(2s).count();
+        auto now_time = this->get_clock()->now();
+
+        // 若相机未打开，则按照间隔尝试重新打开
+        if (!cam.IsOpen())
+        {
+            settings_applied_ = false;
+            if (!last_open_attempt_valid_ || (now_time - last_open_attempt_).seconds() >= reconnect_interval_sec_)
+            {
+                last_open_attempt_ = now_time;
+                last_open_attempt_valid_ = true;
+                RCLCPP_WARN(this->get_logger(), "相机未连接，尝试打开(index=%u)...", device_index_);
+
+                if (!attemptCameraOpen())
+                {
+                    RCLCPP_WARN(this->get_logger(), "相机打开失败: %s", cam.GetLastError().c_str());
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        // 再次确认已经打开
+        if (!cam.IsOpen())
+        {
+            return;
+        }
+
+        // 确保参数已应用
+        if (!settings_applied_)
+        {
+            settings_applied_ = applyCurrentSettings();
+        }
+
         // 确保采集正在进行
         if (!cam.IsGrabbing())
         {
@@ -182,6 +237,9 @@ class HikCameraNode : public rclcpp::Node
             {
                 RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), throttle_ns, "重新开始采集失败: %s",
                                      cam.GetLastError().c_str());
+                cam.Close();
+                settings_applied_ = false;
+                last_open_attempt_valid_ = false;
                 return;
             }
         }
@@ -191,6 +249,11 @@ class HikCameraNode : public rclcpp::Node
         {
             RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), throttle_ns, "获取图像失败: %s",
                                  cam.GetLastError().c_str());
+            if (!cam.IsOpen())
+            {
+                settings_applied_ = false;
+                last_open_attempt_valid_ = false;
+            }
             return;
         }
 
@@ -245,6 +308,73 @@ class HikCameraNode : public rclcpp::Node
         }
     }
 
+    bool attemptCameraOpen()
+    {
+        RCLCPP_INFO(this->get_logger(), "尝试打开相机 (index=%u)", device_index_);
+        if (!cam.Open(device_index_))
+        {
+            return false;
+        }
+
+        settings_applied_ = applyCurrentSettings();
+
+        if (!cam.StartGrabbing())
+        {
+            RCLCPP_ERROR(this->get_logger(), "开始采集失败: %s", cam.GetLastError().c_str());
+            cam.Close();
+            settings_applied_ = false;
+            return false;
+        }
+
+        if (settings_applied_)
+        {
+            RCLCPP_INFO(this->get_logger(), "相机连接成功并已应用参数");
+        }
+        else
+        {
+            RCLCPP_INFO(this->get_logger(), "相机连接成功，但部分参数应用失败，将在后续重试");
+        }
+
+        return true;
+    }
+
+    bool applyCurrentSettings()
+    {
+        if (!cam.IsOpen())
+        {
+            return false;
+        }
+
+        bool ok = true;
+        auto try_set = [&](const std::string &name, bool success) {
+            if (!success)
+            {
+                ok = false;
+                RCLCPP_WARN(this->get_logger(), "%s 设置失败: %s", name.c_str(), cam.GetLastError().c_str());
+            }
+        };
+
+        try_set("曝光时间", cam.SetExposureTime(static_cast<float>(exposure_time_)));
+        try_set("增益", cam.SetGain(static_cast<float>(gain_)));
+        try_set("触发模式", cam.SetTriggerMode(trigger_mode_));
+        if (frame_rate_ > 0.0)
+        {
+            bool success = cam.SetFrameRate(static_cast<float>(frame_rate_));
+            try_set("帧率", success);
+            if (success)
+            {
+                double applied = static_cast<double>(cam.GetFrameRate());
+                if (applied > 0.0)
+                {
+                    frame_rate_ = applied;
+                }
+            }
+        }
+        try_set("像素格式", cam.SetPixelFormat(pixel_format_));
+
+        return ok;
+    }
+
     std::string pixelFormatToEncoding(unsigned int pixel_format) const
     {
         switch (pixel_format)
@@ -266,11 +396,19 @@ class HikCameraNode : public rclcpp::Node
 
     //相机实例、publisher 与定时器
     hik::HikCamera cam;
+    unsigned int device_index_ = 0;
+    double exposure_time_ = 2000.0;
+    double gain_ = 7.0;
+    bool trigger_mode_ = false;
     rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr pub_;
     rclcpp::TimerBase::SharedPtr timer_;
-    double frame_rate_ = 30.0;
+    double frame_rate_ = 20.0;
     unsigned int pixel_format_ = PixelType_Gvsp_BGR8_Packed;
     std::string frame_id_ = "hik_camera_optical_frame";
+    bool settings_applied_ = false;
+    bool last_open_attempt_valid_ = false;
+    rclcpp::Time last_open_attempt_;
+    const double reconnect_interval_sec_ = 1.0;
     std::atomic_uint publish_count_{0};
     rclcpp::Time last_fps_time_;
     //参数回调句柄

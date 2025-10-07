@@ -1,6 +1,7 @@
 #include "HikCamera.h"
 #include "PixelType.h"
 #include <chrono>
+#include <cmath>
 #include <cstring>
 #include <iostream>
 #include <sstream>
@@ -55,21 +56,60 @@ bool HikCamera::SetFrameRate(float fps)
         return false;
     }
 
-    // 部分相机使用 AcquisitionFrameRate 设置帧率
-    int ret = MV_CC_SetFloatValue(m_handle, "AcquisitionFrameRate", fps);
-    if (ret != MV_OK)
+    if (fps <= 0.0f)
     {
-        // 有些 SDK 需要先打开帧率控制开关，尝试开启并重试
-        MV_CC_SetEnumValue(m_handle, "AcquisitionFrameRateEnable", 1);
-        ret = MV_CC_SetFloatValue(m_handle, "AcquisitionFrameRate", fps);
-        if (ret != MV_OK)
+        m_lastError = "Frame rate must be positive";
+        return false;
+    }
+
+    float targetFps = fps;
+    MVCC_FLOATVALUE attr;
+    int ret = MV_CC_GetFloatValue(m_handle, "AcquisitionFrameRate", &attr);
+    if (ret == MV_OK)
+    {
+        if (targetFps < attr.fMin)
         {
-            SetError("Set frame rate failed", ret);
-            return false;
+            targetFps = attr.fMin;
+        }
+        if (targetFps > attr.fMax)
+        {
+            targetFps = attr.fMax;
         }
     }
 
-    m_savedFrameRate = fps;
+    ret = MV_CC_SetBoolValue(m_handle, "AcquisitionFrameRateEnable", true);
+    if (ret != MV_OK)
+    {
+        std::cerr << "HikCamera Warning: enable AcquisitionFrameRate failed (error code: 0x" << std::hex << ret
+                  << std::dec << ")" << std::endl;
+    }
+
+    ret = MV_CC_SetFloatValue(m_handle, "AcquisitionFrameRate", targetFps);
+    if (ret != MV_OK)
+    {
+        SetError("Set frame rate failed", ret);
+        return false;
+    }
+
+    MVCC_FLOATVALUE current;
+    float applied = targetFps;
+    ret = MV_CC_GetFloatValue(m_handle, "ResultingFrameRate", &current);
+    if (ret == MV_OK)
+    {
+        applied = current.fCurValue;
+    }
+    else if (MV_CC_GetFloatValue(m_handle, "AcquisitionFrameRate", &current) == MV_OK)
+    {
+        applied = current.fCurValue;
+    }
+
+    if (std::fabs(applied - fps) > 0.1f)
+    {
+        std::cerr << "HikCamera Warning: requested frame rate " << fps << " fps but camera applied " << applied
+                  << " fps" << std::endl;
+    }
+
+    m_savedFrameRate = applied;
     return true;
 }
 
@@ -82,12 +122,19 @@ float HikCamera::GetFrameRate()
     }
 
     MVCC_FLOATVALUE value;
-    int ret = MV_CC_GetFloatValue(m_handle, "AcquisitionFrameRate", &value);
-    if (ret != MV_OK)
+    int ret = MV_CC_GetFloatValue(m_handle, "ResultingFrameRate", &value);
+    if (ret == MV_OK)
     {
-        return 0.0f;
+        return value.fCurValue;
     }
-    return value.fCurValue;
+
+    ret = MV_CC_GetFloatValue(m_handle, "AcquisitionFrameRate", &value);
+    if (ret == MV_OK)
+    {
+        return value.fCurValue;
+    }
+
+    return 0.0f;
 }
 
 // 设置像素格式（通过像素格式常量）

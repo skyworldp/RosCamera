@@ -55,7 +55,7 @@ CMAKE_BUILD_TYPE:STRING=Debug
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
-//C++ compiler
+//CXX compiler
 CMAKE_CXX_COMPILER:STRING=/usr/bin/clang++
 
 //LLVM archiver
