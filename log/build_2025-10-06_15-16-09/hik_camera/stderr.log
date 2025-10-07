@@ -1,0 +1,16 @@
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o: in function `HikCameraNode::HikCameraNode(rclcpp::NodeOptions const&)':
+hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x9c): undefined reference to `hik::HikCamera::HikCamera()'
+/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x381): undefined reference to `hik::HikCamera::Open(unsigned int)'
+/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x399): undefined reference to `hik::HikCamera::StartGrabbing()'
+/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x608): undefined reference to `hik::HikCamera::~HikCamera()'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o: in function `HikCameraNode::on_publish()':
+hik_camera_node.cpp:(.text._ZN13HikCameraNode10on_publishEv[_ZN13HikCameraNode10on_publishEv]+0x32): undefined reference to `hik::HikCamera::GetWidth()'
+/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNode10on_publishEv[_ZN13HikCameraNode10on_publishEv]+0x62): undefined reference to `hik::HikCamera::GetHeight()'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o: in function `HikCameraNode::~HikCameraNode()':
+hik_camera_node.cpp:(.text._ZN13HikCameraNodeD2Ev[_ZN13HikCameraNodeD2Ev]+0x27b): undefined reference to `hik::HikCamera::Close()'
+/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeD2Ev[_ZN13HikCameraNodeD2Ev]+0x2b9): undefined reference to `hik::HikCamera::~HikCamera()'
+/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeD2Ev[_ZN13HikCameraNodeD2Ev]+0x307): undefined reference to `hik::HikCamera::~HikCamera()'
+clang: [0;1;31merror: [0m[1mlinker command failed with exit code 1 (use -v to see invocation)[0m
+gmake[2]: *** [CMakeFiles/hik_camera_node.dir/build.make:230：hik_camera_node] 错误 1
+gmake[1]: *** [CMakeFiles/Makefile2:137：CMakeFiles/hik_camera_node.dir/all] 错误 2
+gmake: *** [Makefile:146：all] 错误 2

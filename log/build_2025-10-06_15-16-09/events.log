@@ -1,0 +1,75 @@
+[0.000000] (-) TimerEvent: {}
+[0.001025] (hik_camera) JobQueued: {'identifier': 'hik_camera', 'dependencies': OrderedDict()}
+[0.001045] (hik_camera) JobStarted: {'identifier': 'hik_camera'}
+[0.003825] (hik_camera) JobProgress: {'identifier': 'hik_camera', 'progress': 'cmake'}
+[0.004886] (hik_camera) JobProgress: {'identifier': 'hik_camera', 'progress': 'build'}
+[0.008386] (hik_camera) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/skyworld/文档/Ros/build/hik_camera', '--', '-j24', '-l24'], 'cwd': '/home/skyworld/文档/Ros/build/hik_camera', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('PYTHON_BASIC_REPL', '1'), ('LANGUAGE', 'zh_CN:zh'), ('USER', 'skyworld'), ('ALLUSERSPROFILE', '/opt/MVS/MVFG'), ('XDG_SESSION_TYPE', 'x11'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/opt/MVS/lib/64:/opt/MVS/lib/32:/opt/MVS/lib/64:/opt/MVS/lib/32:'), ('SHLVL', '1'), ('HOME', '/home/skyworld'), ('CHROME_DESKTOP', 'code.desktop'), ('OLDPWD', '/home/skyworld/文档/Ros'), ('LESS', '-R'), ('DESKTOP_SESSION', 'gnome-xorg'), ('TERM_PROGRAM_VERSION', '1.104.3'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/code.desktop'), ('ZSH', '/home/skyworld/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('GTK_MODULES', 'gail:atk-bridge'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('MANAGERPID', '3475'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '3913'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('PYDEVD_DISABLE_FILE_VALIDATION', '1'), ('BUNDLED_DEBUGPY_PATH', '/home/skyworld/.vscode/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/libs/debugpy'), ('VSCODE_PYTHON_AUTOACTIVATE_GUARD', '1'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '11024'), ('COLORTERM', 'truecolor'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'skyworld'), ('GTK_IM_MODULE', 'ibus'), ('JOURNAL_STREAM', '8:12934'), ('_', '/usr/bin/colcon'), ('XDG_SESSION_CLASS', 'user'), ('ROS_VERSION', '2'), ('USER_ZDOTDIR', '/home/skyworld'), ('USERNAME', 'skyworld'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('MVCAM_SDK_PATH', '/opt/MVS'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/skyworld/.vscode/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/scripts/noConfigScripts:/home/skyworld/.config/Code/User/globalStorage/github.copilot-chat/debugCommand'), ('MVCAM_GENICAM_CLPROTOCOL', '/opt/MVS/lib/CLProtocol'), ('SESSION_MANAGER', 'local/skyworld-YAOSHI-Series:@/tmp/.ICE-unix/3890,unix/skyworld-YAOSHI-Series:/tmp/.ICE-unix/3890'), ('INVOCATION_ID', 'cf56f513d7624e778a5250ff8969da4d'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('XDG_MENU_PREFIX', 'gnome-'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':1'), ('LANG', 'zh_CN.UTF-8'), ('XDG_CURRENT_DESKTOP', 'GNOME'), ('VSCODE_DEBUGPY_ADAPTER_ENDPOINTS', '/home/skyworld/.vscode/extensions/ms-python.debugpy-2025.10.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-396c543ba88086aa.txt'), ('PYTHONSTARTUP', '/home/skyworld/.config/Code/User/workspaceStorage/f0d4b5de64b5dc5c235aadd9d331b757/ms-python.python/pythonrc.py'), ('VSCODE_INJECTION', '1'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('XDG_SESSION_DESKTOP', 'gnome-xorg'), ('XMODIFIERS', '@im=ibus'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('TERM_PROGRAM', 'vscode'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-179b534cf0.sock'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'GNOME'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/usr/bin/zsh'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'gnome-xorg'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/skyworld/文档/Ros/build/hik_camera'), ('XDG_DATA_DIRS', '/usr/share/gnome-xorg:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-gnome-xorg:/etc/xdg'), ('ZDOTDIR', '/home/skyworld'), ('MVCAM_SDK_VERSION', ''), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('MVCAM_COMMON_RUNENV', '/opt/MVS/lib'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.024384] (hik_camera) StdoutLine: {'line': b'-- USE_CLANG=ON: Found clang at /usr/bin/clang and clang++ at /usr/bin/clang++; setting compilers to clang/clang++\n'}
+[0.026721] (hik_camera) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.088574] (hik_camera) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.099671] (-) TimerEvent: {}
+[0.102486] (hik_camera) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.102614] (hik_camera) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.103461] (hik_camera) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.108639] (hik_camera) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.112639] (hik_camera) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.129408] (hik_camera) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.129905] (hik_camera) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.180067] (hik_camera) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.199822] (-) TimerEvent: {}
+[0.200242] (hik_camera) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.212610] (hik_camera) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[0.219017] (hik_camera) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[0.253061] (hik_camera) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[0.253237] (hik_camera) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/skyworld/\xe6\x96\x87\xe6\xa1\xa3/Ros/src/hik_camera/include/hik_camera>\n'}
+[0.253274] (hik_camera) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[0.253641] (hik_camera) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[0.254793] (hik_camera) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[0.254901] (hik_camera) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[0.255003] (hik_camera) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[0.255324] (hik_camera) StdoutLine: {'line': b'-- Configuring done\n'}
+[0.261169] (hik_camera) StdoutLine: {'line': b'-- Generating done\n'}
+[0.262920] (hik_camera) StdoutLine: {'line': b'-- Build files have been written to: /home/skyworld/\xe6\x96\x87\xe6\xa1\xa3/Ros/build/hik_camera\n'}
+[0.287195] (hik_camera) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target hik_camera_node\x1b[0m\n'}
+[0.297113] (hik_camera) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o\x1b[0m\n'}
+[0.299906] (-) TimerEvent: {}
+[0.400804] (-) TimerEvent: {}
+[0.501047] (-) TimerEvent: {}
+[0.601972] (-) TimerEvent: {}
+[0.702238] (-) TimerEvent: {}
+[0.802820] (-) TimerEvent: {}
+[0.903370] (-) TimerEvent: {}
+[1.003698] (-) TimerEvent: {}
+[1.103972] (-) TimerEvent: {}
+[1.204658] (-) TimerEvent: {}
+[1.305262] (-) TimerEvent: {}
+[1.406433] (-) TimerEvent: {}
+[1.506801] (-) TimerEvent: {}
+[1.607100] (-) TimerEvent: {}
+[1.707473] (-) TimerEvent: {}
+[1.808878] (-) TimerEvent: {}
+[1.909136] (-) TimerEvent: {}
+[1.969158] (hik_camera) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable hik_camera_node\x1b[0m\n'}
+[2.009444] (-) TimerEvent: {}
+[2.110301] (-) TimerEvent: {}
+[2.210774] (-) TimerEvent: {}
+[2.311049] (-) TimerEvent: {}
+[2.327304] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o: in function `HikCameraNode::HikCameraNode(rclcpp::NodeOptions const&)':\n"}
+[2.327893] (hik_camera) StderrLine: {'line': b"hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x9c): undefined reference to `hik::HikCamera::HikCamera()'\n"}
+[2.327952] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x381): undefined reference to `hik::HikCamera::Open(unsigned int)'\n"}
+[2.327982] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x399): undefined reference to `hik::HikCamera::StartGrabbing()'\n"}
+[2.328008] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE[_ZN13HikCameraNodeC2ERKN6rclcpp11NodeOptionsE]+0x608): undefined reference to `hik::HikCamera::~HikCamera()'\n"}
+[2.328034] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o: in function `HikCameraNode::on_publish()':\n"}
+[2.328060] (hik_camera) StderrLine: {'line': b"hik_camera_node.cpp:(.text._ZN13HikCameraNode10on_publishEv[_ZN13HikCameraNode10on_publishEv]+0x32): undefined reference to `hik::HikCamera::GetWidth()'\n"}
+[2.328084] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNode10on_publishEv[_ZN13HikCameraNode10on_publishEv]+0x62): undefined reference to `hik::HikCamera::GetHeight()'\n"}
+[2.328108] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o: in function `HikCameraNode::~HikCameraNode()':\n"}
+[2.328134] (hik_camera) StderrLine: {'line': b"hik_camera_node.cpp:(.text._ZN13HikCameraNodeD2Ev[_ZN13HikCameraNodeD2Ev]+0x27b): undefined reference to `hik::HikCamera::Close()'\n"}
+[2.328161] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeD2Ev[_ZN13HikCameraNodeD2Ev]+0x2b9): undefined reference to `hik::HikCamera::~HikCamera()'\n"}
+[2.328189] (hik_camera) StderrLine: {'line': b"/usr/bin/ld: hik_camera_node.cpp:(.text._ZN13HikCameraNodeD2Ev[_ZN13HikCameraNodeD2Ev]+0x307): undefined reference to `hik::HikCamera::~HikCamera()'\n"}
+[2.368134] (hik_camera) StderrLine: {'line': b'clang: \x1b[0;1;31merror: \x1b[0m\x1b[1mlinker command failed with exit code 1 (use -v to see invocation)\x1b[0m\n'}
+[2.370462] (hik_camera) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/hik_camera_node.dir/build.make:230\xef\xbc\x9ahik_camera_node] \xe9\x94\x99\xe8\xaf\xaf 1\n'}
+[2.370579] (hik_camera) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137\xef\xbc\x9aCMakeFiles/hik_camera_node.dir/all] \xe9\x94\x99\xe8\xaf\xaf 2\n'}
+[2.370811] (hik_camera) StderrLine: {'line': b'gmake: *** [Makefile:146\xef\xbc\x9aall] \xe9\x94\x99\xe8\xaf\xaf 2\n'}
+[2.374974] (hik_camera) CommandEnded: {'returncode': 2}
+[2.380085] (hik_camera) JobEnded: {'identifier': 'hik_camera', 'rc': 2}
+[2.391017] (-) EventReactorShutdown: {}

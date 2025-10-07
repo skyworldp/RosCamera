@@ -1,0 +1,39 @@
+[0.006s] Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
+[0.020s] -- USE_CLANG=ON: Found clang at /usr/bin/clang and clang++ at /usr/bin/clang++; setting compilers to clang/clang++
+[0.023s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.087s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.100s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.101s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.104s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.108s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.113s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.126s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.128s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.179s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.203s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.216s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[0.222s] -- Found Hikvision SDK libs in /home/skyworld/文档/Ros/src/hik_camera/include/hik_camera/lib/64
+[0.222s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.222s] [31mCMake Error at CMakeLists.txt:57 (target_link_libraries):
+[0.222s]   The plain signature for target_link_libraries has already been used with
+[0.222s]   the target "hik_camera_node".  All uses of target_link_libraries with a
+[0.222s]   target must be either all-keyword or all-plain.
+[0.222s] 
+[0.222s]   The uses of the plain signature are here:
+[0.222s] 
+[0.222s]    * /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:145 (target_link_libraries)
+[0.222s]    * /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:151 (target_link_libraries)
+[0.222s] 
+[0.222s] 
+[0.222s] [0m
+[0.262s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.262s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/skyworld/文档/Ros/src/hik_camera/include/hik_camera>
+[0.262s] -- Configured cppcheck exclude dirs and/or files: 
+[0.262s] -- Added test 'lint_cmake' to check CMake code style
+[0.263s] -- Added test 'uncrustify' to check C / C++ code style
+[0.263s] -- Configured uncrustify additional arguments: 
+[0.264s] -- Added test 'xmllint' to check XML markup files
+[0.264s] -- Configuring incomplete, errors occurred!
+[0.264s] See also "/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/CMakeOutput.log".
+[0.270s] gmake: *** [Makefile:267：cmake_check_build_system] 错误 1
+[0.272s] Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24

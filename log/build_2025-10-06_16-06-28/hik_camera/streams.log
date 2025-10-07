@@ -1,0 +1,27 @@
+[0.006s] Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
+[0.039s] [35m[1mConsolidate compiler generated dependencies of target hik_camera_node[0m
+[0.051s] [ 33%] [32mBuilding CXX object CMakeFiles/hik_camera_node.dir/src/hik_camera_node.cpp.o[0m
+[0.051s] [ 66%] [32mBuilding CXX object CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o[0m
+[1.831s] [100%] [32m[1mLinking CXX executable hik_camera_node[0m
+[2.217s] [100%] Built target hik_camera_node
+[2.228s] Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
+[2.235s] Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/skyworld/文档/Ros/build/hik_camera
+[2.241s] -- Install configuration: ""
+[2.241s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/lib/hik_camera/hik_camera_node
+[2.241s] -- Set runtime path of "/home/skyworld/文档/Ros/install/hik_camera/lib/hik_camera/hik_camera_node" to "/home/skyworld/文档/Ros/src/hik_camera/include/hik_camera/lib/64"
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/ament_index/resource_index/package_run_dependencies/hik_camera
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/ament_index/resource_index/parent_prefix_path/hik_camera
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/ament_prefix_path.sh
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/ament_prefix_path.dsv
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/path.sh
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/path.dsv
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.bash
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.sh
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.zsh
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.dsv
+[2.241s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/package.dsv
+[2.241s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/ament_index/resource_index/packages/hik_camera
+[2.243s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/cmake/hik_cameraConfig.cmake
+[2.243s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/cmake/hik_cameraConfig-version.cmake
+[2.243s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/package.xml
+[2.243s] Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/skyworld/文档/Ros/build/hik_camera

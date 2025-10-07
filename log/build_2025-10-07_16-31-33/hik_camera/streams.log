@@ -1,0 +1,52 @@
+[0.005s] Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
+[0.021s] -- USE_CLANG=ON: Found clang at /usr/bin/clang and clang++ at /usr/bin/clang++; setting compilers to clang/clang++
+[0.023s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.091s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.102s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.103s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.106s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.110s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.116s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.128s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.129s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.178s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.201s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.213s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[0.219s] -- Found Hikvision SDK libs in /home/skyworld/文档/Ros/src/hik_camera/include/hik_camera/lib/64
+[0.219s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.256s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.256s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/skyworld/文档/Ros/src/hik_camera/include/hik_camera>
+[0.256s] -- Configured cppcheck exclude dirs and/or files: 
+[0.257s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.258s] -- Added test 'lint_cmake' to check CMake code style
+[0.258s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.258s] -- Added test 'uncrustify' to check C / C++ code style
+[0.258s] -- Configured uncrustify additional arguments: 
+[0.258s] -- Added test 'xmllint' to check XML markup files
+[0.259s] -- Configuring done
+[0.265s] -- Generating done
+[0.267s] -- Build files have been written to: /home/skyworld/文档/Ros/build/hik_camera
+[0.285s] [35m[1mConsolidate compiler generated dependencies of target hik_camera_node[0m
+[0.300s] [100%] Built target hik_camera_node
+[0.311s] Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
+[0.317s] Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/skyworld/文档/Ros/build/hik_camera
+[0.322s] -- Install configuration: ""
+[0.322s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/lib/hik_camera/hik_camera_node
+[0.322s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/launch
+[0.322s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/launch/hik_camera_launch.py
+[0.322s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/ament_index/resource_index/package_run_dependencies/hik_camera
+[0.322s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/ament_index/resource_index/parent_prefix_path/hik_camera
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/ament_prefix_path.sh
+[0.323s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/ament_prefix_path.dsv
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/path.sh
+[0.323s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/environment/path.dsv
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.bash
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.sh
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.zsh
+[0.323s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/local_setup.dsv
+[0.323s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/package.dsv
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/ament_index/resource_index/packages/hik_camera
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/cmake/hik_cameraConfig.cmake
+[0.323s] -- Up-to-date: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/cmake/hik_cameraConfig-version.cmake
+[0.323s] -- Installing: /home/skyworld/文档/Ros/install/hik_camera/share/hik_camera/package.xml
+[0.325s] Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/skyworld/文档/Ros/build/hik_camera

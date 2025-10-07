@@ -1,0 +1,49 @@
+[0.007s] Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
+[0.023s] -- USE_CLANG=ON: Found clang at /usr/bin/clang and clang++ at /usr/bin/clang++; setting compilers to clang/clang++
+[0.028s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.095s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.108s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.108s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.113s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.117s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.122s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.136s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.140s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.195s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.216s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.228s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[0.235s] -- Found Hikvision SDK libs in /home/skyworld/文档/Ros/src/hik_camera/include/hik_camera/lib/64
+[0.235s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.273s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.273s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/skyworld/文档/Ros/src/hik_camera/include/hik_camera>
+[0.273s] -- Configured cppcheck exclude dirs and/or files: 
+[0.275s] -- Added test 'lint_cmake' to check CMake code style
+[0.277s] -- Added test 'uncrustify' to check C / C++ code style
+[0.277s] -- Configured uncrustify additional arguments: 
+[0.277s] -- Added test 'xmllint' to check XML markup files
+[0.278s] -- Configuring done
+[0.290s] -- Generating done
+[0.291s] -- Build files have been written to: /home/skyworld/文档/Ros/build/hik_camera
+[0.316s] [35m[1mConsolidate compiler generated dependencies of target hik_camera_node[0m
+[0.328s] [ 33%] [32mBuilding CXX object CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o[0m
+[0.496s] [1m/home/skyworld/文档/Ros/src/hik_camera/src/cameral_func/HikCamera.cpp:310:17: [0m[0;1;35mwarning: [0m[1mcomparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare][0m
+[0.496s]         if (ret != MV_E_NODATA)
+[0.496s] [0;1;32m            ~~~ ^  ~~~~~~~~~~~
+[0.497s] [0m[1m/home/skyworld/文档/Ros/src/hik_camera/src/cameral_func/HikCamera.cpp:365:10: [0m[0;1;35mwarning: [0m[1mvariable 'needConvert' set but not used [-Wunused-but-set-variable][0m
+[0.497s]     bool needConvert = true;
+[0.497s] [0;1;32m         ^
+[0.497s] [0m[1m/home/skyworld/文档/Ros/src/hik_camera/src/cameral_func/HikCamera.cpp:345:17: [0m[0;1;35mwarning: [0m[1mcomparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare][0m
+[0.497s]         if (ret != MV_E_NODATA)
+[0.497s] [0;1;32m            ~~~ ^  ~~~~~~~~~~~
+[0.529s] [0m3 warnings generated.
+[0.539s] [ 66%] [32m[1mLinking CXX executable hik_camera_node[0m
+[0.961s] [100%] Built target hik_camera_node
+[0.971s] Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/skyworld/文档/Ros/build/hik_camera -- -j24 -l24
+[0.978s] Invoking command in '/home/skyworld/文档/Ros/build/hik_camera': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/skyworld/文档/Ros/build/hik_camera
+[0.982s] -- Install configuration: ""
+[0.983s] [31mCMake Error at cmake_install.cmake:52 (file):
+[0.983s]   file cannot create directory: /usr/local/lib/hik_camera.  Maybe need
+[0.983s]   administrative privileges.
+[0.983s] 
+[0.983s] [0m
+[0.987s] Invoked command in '/home/skyworld/文档/Ros/build/hik_camera' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/skyworld/文档/Ros/build/hik_camera

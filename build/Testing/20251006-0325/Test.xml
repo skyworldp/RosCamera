@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20251006-0325-Experimental"
+	Name="skyworld-YAOSHI-Series"
+	Generator="ctest-3.22.1"
+	CompilerName="/usr/bin/clang++"
+	CompilerVersion="14.0.0"
+	OSName="Linux"
+	Hostname="skyworld-YAOSHI-Series"
+	OSRelease="6.8.0-85-generic"
+	OSVersion="#85~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep 19 16:18:59 UTC 2"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="198"
+	ProcessorCacheSize="36864"
+	NumberOfLogicalCPU="24"
+	NumberOfPhysicalCPU="1"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="31547"
+	LogicalProcessorsPerPhysical="24"
+	ProcessorClockFrequency="5066.85"
+	>
+	<Testing>
+		<StartDateTime>Oct 06 20:44 CST</StartDateTime>
+		<StartTestTime>1759754682</StartTestTime>
+		<TestList/>
+		<EndDateTime>Oct 06 20:44 CST</EndDateTime>
+		<EndTestTime>1759754682</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

@@ -1,0 +1,10 @@
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/uninstall.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/hik_camera_uninstall.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/hik_camera_node.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/test.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/edit_cache.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/rebuild_cache.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/list_install_components.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/install.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/install/local.dir
+/home/skyworld/文档/Ros/build/hik_camera/CMakeFiles/install/strip.dir

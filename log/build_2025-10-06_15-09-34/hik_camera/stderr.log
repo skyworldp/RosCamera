@@ -1,0 +1,59 @@
+[1m/home/skyworld/文档/Ros/src/hik_camera/src/cameral_func/HikCamera.cpp:310:17: [0m[0;1;35mwarning: [0m[1mcomparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare][0m
+        if (ret != MV_E_NODATA)
+[0;1;32m            ~~~ ^  ~~~~~~~~~~~
+[0m[1m/home/skyworld/文档/Ros/src/hik_camera/src/cameral_func/HikCamera.cpp:365:10: [0m[0;1;35mwarning: [0m[1mvariable 'needConvert' set but not used [-Wunused-but-set-variable][0m
+    bool needConvert = true;
+[0;1;32m         ^
+[0m[1m/home/skyworld/文档/Ros/src/hik_camera/src/cameral_func/HikCamera.cpp:345:17: [0m[0;1;35mwarning: [0m[1mcomparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare][0m
+        if (ret != MV_E_NODATA)
+[0;1;32m            ~~~ ^  ~~~~~~~~~~~
+[0m3 warnings generated.
+[1m/home/skyworld/文档/Ros/src/hik_camera/src/hik_camera_node.cpp:21:13: [0m[0;1;35mwarning: [0m[1munused variable 'index' [-Wunused-variable][0m
+        int index = 0; // 默认打开第一个相机
+[0;1;32m            ^
+[0m1 warning generated.
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::StopGrabbing()':
+HikCamera.cpp:(.text+0x14f): undefined reference to `MV_CC_StopGrabbing'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::Close()':
+HikCamera.cpp:(.text+0x279): undefined reference to `MV_CC_CloseDevice'
+/usr/bin/ld: HikCamera.cpp:(.text+0x31e): undefined reference to `MV_CC_DestroyHandle'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::EnumerateDevices()':
+HikCamera.cpp:(.text+0x600): undefined reference to `MV_CC_EnumDevices'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::Open(unsigned int)':
+HikCamera.cpp:(.text+0xf87): undefined reference to `MV_CC_EnumDevices'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1097): undefined reference to `MV_CC_CreateHandle'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1177): undefined reference to `MV_CC_OpenDevice'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1201): undefined reference to `MV_CC_DestroyHandle'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1276): undefined reference to `MV_CC_SetEnumValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::OpenBySerialNumber(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
+HikCamera.cpp:(.text+0x13a8): undefined reference to `MV_CC_EnumDevices'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::StartGrabbing()':
+HikCamera.cpp:(.text+0x17da): undefined reference to `MV_CC_StartGrabbing'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::GrabImage(hik::ImageData&, unsigned int)':
+HikCamera.cpp:(.text+0x1933): undefined reference to `MV_CC_GetImageBuffer'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1a6f): undefined reference to `MV_CC_FreeImageBuffer'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::GrabImageBGR(hik::ImageData&, unsigned int)':
+HikCamera.cpp:(.text+0x1b13): undefined reference to `MV_CC_GetImageBuffer'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1d57): undefined reference to `MV_CC_ConvertPixelType'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1de8): undefined reference to `MV_CC_FreeImageBuffer'
+/usr/bin/ld: HikCamera.cpp:(.text+0x1e91): undefined reference to `MV_CC_FreeImageBuffer'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::SetExposureTime(float)':
+HikCamera.cpp:(.text+0x1f14): undefined reference to `MV_CC_SetFloatValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::GetExposureTime()':
+HikCamera.cpp:(.text+0x200e): undefined reference to `MV_CC_GetFloatValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::SetGain(float)':
+HikCamera.cpp:(.text+0x20a4): undefined reference to `MV_CC_SetFloatValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::GetGain()':
+HikCamera.cpp:(.text+0x219e): undefined reference to `MV_CC_GetFloatValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::SetTriggerMode(bool)':
+HikCamera.cpp:(.text+0x2242): undefined reference to `MV_CC_SetEnumValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::TriggerSoftware()':
+HikCamera.cpp:(.text+0x234a): undefined reference to `MV_CC_SetCommandValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::GetWidth()':
+HikCamera.cpp:(.text+0x243d): undefined reference to `MV_CC_GetIntValue'
+/usr/bin/ld: CMakeFiles/hik_camera_node.dir/src/cameral_func/HikCamera.cpp.o: in function `hik::HikCamera::GetHeight()':
+HikCamera.cpp:(.text+0x24ad): undefined reference to `MV_CC_GetIntValue'
+clang: [0;1;31merror: [0m[1mlinker command failed with exit code 1 (use -v to see invocation)[0m
+gmake[2]: *** [CMakeFiles/hik_camera_node.dir/build.make:246：hik_camera_node] 错误 1
+gmake[1]: *** [CMakeFiles/Makefile2:137：CMakeFiles/hik_camera_node.dir/all] 错误 2
+gmake: *** [Makefile:146：all] 错误 2
