@@ -32,9 +32,6 @@ colcon-*
 *.old
 *.orig
 
-# macOS
-.DS_Store
-
 # Python
 __pycache__/
 *.py[cod]
@@ -71,7 +68,7 @@ pytest_cache/
 *.egg-info/
 
 # Misc
-# *.cache
+*.cache
 *.pid
 *.seed
 *.pid.lock
@@ -79,10 +76,3 @@ pytest_cache/
 # VS Code workspace storage
 .vscode-test/
 
-# Local Qt build
-*.moc
-*.qrc
-*.qmlc
-
-# keep README and source files tracked
-!README.md
