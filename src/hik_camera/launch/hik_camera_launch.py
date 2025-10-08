@@ -14,7 +14,7 @@ def generate_launch_description():
     declare_gain = DeclareLaunchArgument("gain", default_value="7.0", description="Gain (float)")
     declare_trigger = DeclareLaunchArgument("trigger_mode", default_value="false",
                                             description="Trigger mode (bool)")
-    declare_frame_rate = DeclareLaunchArgument("frame_rate", default_value="200.0",
+    declare_frame_rate = DeclareLaunchArgument("frame_rate", default_value="43.0",
                                                description="Frame rate (Hz) for SDK")
     # 默认使用 SDK 的 BGR8 常量（如果需要可用 decimal 值覆盖）
     declare_pixel_format = DeclareLaunchArgument("pixel_format", default_value=str(35127317),

@@ -25,7 +25,7 @@ class HikCameraNode : public rclcpp::Node
         : Node("hik_camera_node", options)
     {
         RCLCPP_INFO(this->get_logger(), "HikCameraNode 已构建");
-        constexpr double default_frame_rate = 200.0;
+        constexpr double default_frame_rate = 43.0;
         constexpr unsigned int default_pixel_format = PixelType_Gvsp_BGR8_Packed;
         // 声明参数并设置默认值
         this->declare_parameter<double>("exposure_time", 2000.0);
@@ -401,7 +401,7 @@ class HikCameraNode : public rclcpp::Node
     bool trigger_mode_ = false;
     rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr pub_;
     rclcpp::TimerBase::SharedPtr timer_;
-    double frame_rate_ = 200.0;
+    double frame_rate_ = 43.0;
     unsigned int pixel_format_ = PixelType_Gvsp_BGR8_Packed;
     std::string frame_id_ = "hik_camera_optical_frame";
     bool settings_applied_ = false;
