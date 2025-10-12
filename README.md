@@ -43,6 +43,7 @@ ros2 run hik_camera hik_camera_node
 ```
 
 日志会输出相机的 `camera reported fps` 以及当前帧的分辨率（例如 `camera reported fps: 20.37 Hz, frame size: 3072x2048`）。
+若将 `pixel_format` 设置为 Bayer8（如 `PixelType_Gvsp_BayerRG8`），节点会自动使用 OpenCV 去马赛克并以 BGR8 发布，便于 RViz、rqt_image_view 等工具直接显示。
 
 ## 修改参数（运行时可改）
 节点名称为 `/hik_camera_node`（launch 或 ros2 run 启动后可见），常用参数：
@@ -51,7 +52,7 @@ ros2 run hik_camera hik_camera_node
 - `gain` (double)
 - `trigger_mode` (bool)
 - `frame_rate` (double, Hz)
-- `pixel_format` (int, 使用 SDK 常量，如 PixelType_Gvsp_Mono8 等)
+- `pixel_format` (int, 使用 SDK 常量，如 PixelType_Gvsp_Mono8、PixelType_Gvsp_BayerRG8 等)
 - `frame_id` (string)
 
 在单独终端（已 source 环境）使用 `ros2 param` 修改：
@@ -61,8 +62,13 @@ ros2 run hik_camera hik_camera_node
 ros2 param set /hik_camera_node exposure_time 10000.0
 # 设置期望帧率为 50 Hz
 ros2 param set /hik_camera_node frame_rate 50.0
-# 设置像素格式（示例值，这里使用 BGR8 对应的 SDK 值）
+# 设置像素格式（示例值，这里使用 MONO8 对应的 SDK 值）
 ros2 param set /hik_camera_node pixel_format 17301505
+# 常见 Bayer8 对应值：
+#   PixelType_Gvsp_BayerGR8 = 17301512
+#   PixelType_Gvsp_BayerRG8 = 17301513
+#   PixelType_Gvsp_BayerGB8 = 17301514
+#   PixelType_Gvsp_BayerBG8 = 17301515
 ```
 
 

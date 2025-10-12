@@ -262,33 +262,38 @@ class HikCameraNode : public rclcpp::Node
             return;
         }
 
-        std::string encoding = pixelFormatToEncoding(imageData.pixelFormat);
-        int cvType = CV_8UC3;
-        if (encoding == sensor_msgs::image_encodings::MONO8)
+        std::string encoding;
+        cv::Mat publish_frame;
+
+        if (isBayer8PixelFormat(imageData.pixelFormat))
         {
-            cvType = CV_8UC1;
-        }
-        else if (encoding == sensor_msgs::image_encodings::RGB8 || encoding == sensor_msgs::image_encodings::BGR8)
-        {
-            cvType = CV_8UC3;
-        }
-        else if (encoding == sensor_msgs::image_encodings::RGBA8 || encoding == sensor_msgs::image_encodings::BGRA8)
-        {
-            cvType = CV_8UC4;
+            cv::Mat raw_bayer(imageData.height, imageData.width, CV_8UC1, imageData.data);
+            int conversion_code = bayerToCvConversion(imageData.pixelFormat);
+            if (conversion_code >= 0)
+            {
+                cv::cvtColor(raw_bayer, publish_frame, conversion_code);
+                encoding = sensor_msgs::image_encodings::BGR8;
+            }
+            else
+            {
+                RCLCPP_WARN_ONCE(this->get_logger(), "未知 Bayer 像素格式(0x%08X)，按 MONO8 发布",
+                                 imageData.pixelFormat);
+                publish_frame = raw_bayer;
+                encoding = sensor_msgs::image_encodings::MONO8;
+            }
         }
         else
         {
-            cvType = CV_8UC3;
-            encoding = sensor_msgs::image_encodings::BGR8;
+            encoding = pixelFormatToEncoding(imageData.pixelFormat);
+            int cvType = encodingToCvType(encoding);
+            publish_frame = cv::Mat(imageData.height, imageData.width, cvType, imageData.data);
         }
-
-        cv::Mat frame(imageData.height, imageData.width, cvType, imageData.data);
 
         std_msgs::msg::Header header;
         header.stamp = this->get_clock()->now();
         header.frame_id = frame_id_;
 
-        auto msg = cv_bridge::CvImage(header, encoding, frame).toImageMsg();
+        auto msg = cv_bridge::CvImage(header, encoding, publish_frame).toImageMsg();
         pub_->publish(*msg);
 
         // 记录最近帧的尺寸
@@ -388,8 +393,63 @@ class HikCameraNode : public rclcpp::Node
             return sensor_msgs::image_encodings::RGBA8;
         case PixelType_Gvsp_BGRA8_Packed:
             return sensor_msgs::image_encodings::BGRA8;
+        case PixelType_Gvsp_BayerRG8:
+        case PixelType_Gvsp_BayerBG8:
+        case PixelType_Gvsp_BayerGR8:
+        case PixelType_Gvsp_BayerGB8:
+            // Bayer 数据在发布前会转换为 BGR8
+            return sensor_msgs::image_encodings::BGR8;
         default:
             return sensor_msgs::image_encodings::BGR8;
+        }
+    }
+
+    int encodingToCvType(const std::string &encoding) const
+    {
+        if (encoding == sensor_msgs::image_encodings::MONO8)
+        {
+            return CV_8UC1;
+        }
+        if (encoding == sensor_msgs::image_encodings::RGB8 || encoding == sensor_msgs::image_encodings::BGR8)
+        {
+            return CV_8UC3;
+        }
+        if (encoding == sensor_msgs::image_encodings::RGBA8 || encoding == sensor_msgs::image_encodings::BGRA8)
+        {
+            return CV_8UC4;
+        }
+        // 默认按 BGR8 处理
+        return CV_8UC3;
+    }
+
+    bool isBayer8PixelFormat(unsigned int pixel_format) const
+    {
+        switch (pixel_format)
+        {
+        case PixelType_Gvsp_BayerRG8:
+        case PixelType_Gvsp_BayerBG8:
+        case PixelType_Gvsp_BayerGR8:
+        case PixelType_Gvsp_BayerGB8:
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    int bayerToCvConversion(unsigned int pixel_format) const
+    {
+        switch (pixel_format)
+        {
+        case PixelType_Gvsp_BayerRG8:
+            return cv::COLOR_BayerRG2BGR;
+        case PixelType_Gvsp_BayerBG8:
+            return cv::COLOR_BayerBG2BGR;
+        case PixelType_Gvsp_BayerGR8:
+            return cv::COLOR_BayerGR2BGR;
+        case PixelType_Gvsp_BayerGB8:
+            return cv::COLOR_BayerGB2BGR;
+        default:
+            return -1;
         }
     }
 
