@@ -333,45 +333,21 @@ void processFrame(Mat &frame, Mat &binaryOut, Mat &result)
         return;
     }
 
-    // 用 try-catch 包装整个处理流程，防止任何 OpenCV 异常导致崩溃
-    try
-    {
-        Mat gray, blurred;
+    Mat gray, blurred;
 
-        // 转为灰度图
-        cvtColor(frame, gray, COLOR_BGR2GRAY);
-        if (gray.empty() || gray.cols <= 0 || gray.rows <= 0)
-        {
-            cerr << "processFrame: cvtColor 产生无效结果" << endl;
-            binaryOut = Mat();
-            result = Mat();
-            return;
-        }
+    // 转为灰度图
+    cvtColor(frame, gray, COLOR_BGR2GRAY);
 
-        // 高斯模糊，去除噪声
-        GaussianBlur(gray, blurred, Size(5, 5), 0);
-        if (blurred.empty() || blurred.cols <= 0 || blurred.rows <= 0)
-        {
-            cerr << "processFrame: GaussianBlur 产生无效结果" << endl;
-            binaryOut = Mat();
-            result = Mat();
-            return;
-        }
+    // 高斯模糊，去除噪声
+    GaussianBlur(gray, blurred, Size(5, 5), 0);
 
-        // 使用亮度阈值检测灯条（不区分颜色）
-        Mat binary;
-        threshold(blurred, binary, 190, 255, THRESH_BINARY);
-        if (binary.empty() || binary.cols <= 0 || binary.rows <= 0)
-        {
-            cerr << "processFrame: threshold 产生无效结果" << endl;
-            binaryOut = Mat();
-            result = Mat();
-            return;
-        }
+    // 使用亮度阈值检测灯条（不区分颜色）
+    Mat binary;
+    threshold(blurred, binary, 190, 255, THRESH_BINARY);
 
-        // ============ 增强的形态学操作：连接断裂灯条 ============
-        // 1. 大尺寸竖向闭运算：连接竖向断裂的灯条
-        Mat verticalKernel = getStructuringElement(MORPH_RECT, Size(1, 7)); // 竖向 1x7
+    // ============ 增强的形态学操作：连接断裂灯条 ============
+    // 1. 大尺寸竖向闭运算：连接竖向断裂的灯条
+    Mat verticalKernel = getStructuringElement(MORPH_RECT, Size(1, 7)); // 竖向 1x7
     morphologyEx(binary, binary, MORPH_CLOSE, verticalKernel);
 
     // 2. 小尺寸矩形闭运算：填充小孔
@@ -658,29 +634,6 @@ void processFrame(Mat &frame, Mat &binaryOut, Mat &result)
                 line(result, bar1.center, bar2.center, Scalar(0, 255, 255), 1);
             }
         }
-    }
-    }
-    catch (const cv::Exception &e)
-    {
-        cerr << "processFrame 内部 OpenCV 异常: " << e.what() << endl;
-        cerr << "  at file: " << e.file << ", line: " << e.line << endl;
-        binaryOut = Mat();
-        result = Mat();
-        return;
-    }
-    catch (const std::exception &e)
-    {
-        cerr << "processFrame 内部异常: " << e.what() << endl;
-        binaryOut = Mat();
-        result = Mat();
-        return;
-    }
-    catch (...)
-    {
-        cerr << "processFrame 内部未知异常" << endl;
-        binaryOut = Mat();
-        result = Mat();
-        return;
     }
 }
 

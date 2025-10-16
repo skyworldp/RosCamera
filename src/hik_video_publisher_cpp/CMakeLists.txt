@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(hik_video_publisher_cpp)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
