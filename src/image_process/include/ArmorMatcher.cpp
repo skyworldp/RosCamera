@@ -127,6 +127,8 @@ MatchResult ArmorMatcher::match(const cv::Mat &image) const
 
     // 转为浮点并缩放到 [0,1]
     resized.convertTo(resized, CV_32F, 1.0f / 255.0f);
+    
+    
     cv::imshow("Resized", resized);
     
     cv::Mat mean = (cv::Mat_<float>(1, 3) << 0.485f, 0.456f, 0.406f);

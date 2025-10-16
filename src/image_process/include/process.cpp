@@ -343,7 +343,7 @@ void processFrame(Mat &frame, Mat &binaryOut, Mat &result)
 
     // 使用亮度阈值检测灯条（不区分颜色）
     Mat binary;
-    threshold(blurred, binary, 190, 255, THRESH_BINARY);
+    threshold(blurred, binary, 220, 255, THRESH_BINARY);
 
     // ============ 增强的形态学操作：连接断裂灯条 ============
     // 1. 大尺寸竖向闭运算：连接竖向断裂的灯条
@@ -609,13 +609,36 @@ void processFrame(Mat &frame, Mat &binaryOut, Mat &result)
                         auto matchResult = matcher->match(warpedArmor);
                         if (matchResult.success)
                         {
-                            std::string matchText = std::to_string(matchResult.classId) + " (" +
-                                                    cv::format("%.2f", matchResult.confidence) + ")";
-                            putText(displayArmor, matchResult.label, Point(10, 30), FONT_HERSHEY_SIMPLEX, 0.7,
-                                    Scalar(0, 255, 0), 2);
+                            // 构造要显示的文本：标签、类别 id 和置信度
+                            std::string labelText = matchResult.label;
+                            std::string infoText = "ID:" + std::to_string(matchResult.classId) + " " +
+                                                   cv::format("%.2f", matchResult.confidence);
 
+                            // 在 displayArmor 左上角绘制一个背景矩形以便文本可读
+                            int baseline = 0;
+                            double txtScale = 0.6;
+                            int txtThickness = 2;
+                            cv::Size infoSize =
+                                getTextSize(infoText, FONT_HERSHEY_SIMPLEX, txtScale, txtThickness, &baseline);
+                            cv::Size labelSize =
+                                getTextSize(labelText, FONT_HERSHEY_SIMPLEX, txtScale, txtThickness, &baseline);
+                            int pad = 6;
+                            int rectW = std::max(infoSize.width, labelSize.width) + pad * 2;
+                            int rectH = (infoSize.height + labelSize.height) + pad * 3;
+
+                            // 背景矩形（黑色填充），文本用绿色显示
+                            rectangle(displayArmor, Point(5, 5), Point(5 + rectW, 5 + rectH), Scalar(0, 0, 0), FILLED);
+                            // 写标签（在背景矩形上）
+                            putText(displayArmor, labelText, Point(5 + pad, 5 + pad + labelSize.height),
+                                    FONT_HERSHEY_SIMPLEX, txtScale, Scalar(0, 255, 0), txtThickness);
+                            putText(displayArmor, infoText,
+                                    Point(5 + pad, 5 + pad + labelSize.height + infoSize.height + 2),
+                                    FONT_HERSHEY_SIMPLEX, txtScale, Scalar(0, 255, 0), txtThickness);
+
+                            // 在主图像 result 上也写入标签和置信度（靠近两灯条中心）
                             Point2f textAnchor = (bar1.center + bar2.center) * 0.5f;
-                            putText(result, matchResult.label, Point(textAnchor.x - 60, textAnchor.y - 40),
+                            std::string resultText = labelText + " " + cv::format("(%.2f)", matchResult.confidence);
+                            putText(result, resultText, Point(textAnchor.x - 60, textAnchor.y - 40),
                                     FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 165, 255), 2);
                         }
                         else
@@ -625,7 +648,20 @@ void processFrame(Mat &frame, Mat &binaryOut, Mat &result)
                             {
                                 std::cerr << "ArmorMatcher 推理失败: " << matchResult.error << std::endl;
                             }
+                            // 当分类失败时在 displayArmor 和主图像 result 上显示 'Unknown'
+                            putText(displayArmor, "Unknown", Point(10, 30), FONT_HERSHEY_SIMPLEX, 0.6,
+                                    Scalar(0, 0, 255), 2);
+                            Point2f textAnchor = (bar1.center + bar2.center) * 0.5f;
+                            putText(result, "Unknown", Point(textAnchor.x - 60, textAnchor.y - 40),
+                                    FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
                         }
+                    }
+                    else
+                    {
+                        // 模型不可用时在主图像上注明
+                        Point2f textAnchor = (bar1.center + bar2.center) * 0.5f;
+                        putText(result, "Classifier N/A", Point(textAnchor.x - 60, textAnchor.y - 40),
+                                FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 165, 255), 2);
                     }
                     imshow("Armor Front View", displayArmor);
                 }
