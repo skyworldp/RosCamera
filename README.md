@@ -130,6 +130,25 @@ ros2 topic info /image_binary
 日志或运行时常见问题：
 - 如果报错 "package not found"，确认你在运行前已经 `source install/setup.zsh`，或者在包的 install 下手动 `source install/<pkg>/share/<pkg>/local_setup.zsh`。
 - 如果 `image_process` 在调用模型时报错：确保模型文件路径正确且文件可读（默认硬编码路径在 `src/image_process/resources/`）。
+- **关于 "processFrame 内部 OpenCV 异常" 警告**：这是正常的保护性日志。当某些视频帧无法成功处理时（例如场景中无装甲板、光照不足、或帧数据异常），`image_process` 节点会捕获异常并跳过该帧，而不会崩溃。节点会继续处理后续帧，系统保持稳定运行。如果此警告频繁出现，可以：
+  - 检查输入视频源质量（光照、对比度、清晰度）
+  - 调整 `process.cpp` 中的阈值参数（二值化阈值、轮廓面积等）
+  - 使用 `rqt_image_view` 查看 `/image_binary` 话题，确认二值化效果
+
+5) 查看处理结果和调试：
+
+```bash
+# 查看话题发布频率
+ros2 topic hz /cameraraw
+ros2 topic hz /image_result
+
+# 可视化图像话题
+ros2 run rqt_image_view rqt_image_view
+# 在界面中选择 /cameraraw、/image_result 或 /image_binary
+
+# 查看节点详细日志
+ros2 node info /image_process_node
+```
 
 ```bash
 ros2 topic list
