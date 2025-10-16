@@ -41,6 +41,7 @@ ros2 launch hik_camera hik_camera_launch.py rviz:=false
 source install/setup.zsh
 ros2 run hik_camera hik_camera_node
 ```
+1:  LogType:Level3;  LogTime:2025-10-13 12:51:41:419 ;  LogContent:DevID:Virtual USB3 Vision  Description:[OpenInterfaceInter]Get cti version failed, nRet[0x8000000c];  LogSource:libMvCameraControl.so(GenTLManager.cpp-L1360);  LogProcessName:hik_camera_node;  LogProcessID:11534
 
 日志会输出相机的 `camera reported fps` 以及当前帧的分辨率（例如 `camera reported fps: 20.37 Hz, frame size: 3072x2048`）。
 若将 `pixel_format` 设置为 Bayer8（如 `PixelType_Gvsp_BayerRG8`），节点会自动使用 OpenCV 去马赛克并以 BGR8 发布，便于 RViz、rqt_image_view 等工具直接显示。
