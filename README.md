@@ -74,12 +74,62 @@ ros2 param set /hik_camera_node pixel_format 17301505
 
 
 ## 调试建议
-- 如果 `frame_rate` 未按期望生效，请：
-  - 降低 `exposure_time`（曝光时间通常限制最高帧率），例如 `ros2 param set /hik_camera_node exposure_time 5000.0`。
-  - 切换到 `Mono8` 或降低分辨率以减小每帧数据量。
-  - 对 GigE 相机可尝试调整网卡 MTU（jumbo frames）和 packet size。
 
-- 查看 topic 是否有发布：
+
+## 运行示例：本地视频发布器 + 图像处理节点
+
+下面是一个最小的运行说明，演示如何构建工作区、source 环境，并分别在两个终端启动视频发布节点（`hik_video_publisher_cpp`）和图像处理节点（`image_process`）。
+
+注意：在每个新的终端中都需要 source 安装目录（或各包的 local_setup），否则 ros2 无法发现新构建的包。
+
+1) 构建并 source（在工作区根目录执行）：
+
+```bash
+# zsh
+cd /home/skyworld/文档/Ros
+colcon build --event-handlers console_direct+
+source install/setup.zsh
+```
+
+2) 在终端 A（启动本地视频发布器）：
+
+```bash
+# 在新的终端中先 source 工作区
+source /home/skyworld/文档/Ros/install/setup.zsh
+ros2 launch hik_video_publisher_cpp hik_video_publisher_launch.py rviz:=false
+```
+
+3) 在终端 B（启动图像处理节点）：
+
+```bash
+# 在新的终端中先 source 工作区
+source /home/skyworld/文档/Ros/install/setup.zsh
+ros2 launch image_process image_process_launch.py rviz:=false
+```
+
+可选：如果你希望直接运行编译出的可执行而不是 launch：
+
+```bash
+# 直接运行已安装的二进制（示例）
+ros2 run hik_video_publisher_cpp hik_video_publisher
+ros2 run image_process image_process_node
+```
+
+4) 常用调试命令（在第三个终端执行）：
+
+```bash
+# 列出节点
+ros2 node list
+# 检查话题
+ros2 topic list
+ros2 topic info /cameraraw
+ros2 topic info /image_result
+ros2 topic info /image_binary
+```
+
+日志或运行时常见问题：
+- 如果报错 "package not found"，确认你在运行前已经 `source install/setup.zsh`，或者在包的 install 下手动 `source install/<pkg>/share/<pkg>/local_setup.zsh`。
+- 如果 `image_process` 在调用模型时报错：确保模型文件路径正确且文件可读（默认硬编码路径在 `src/image_process/resources/`）。
 
 ```bash
 ros2 topic list

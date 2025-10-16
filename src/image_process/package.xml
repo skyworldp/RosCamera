@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>image_process</name>
+  <version>0.0.0</version>
+  <description>ROS2 package for armor detection and classification using ArmorMatcher</description>
+  <maintainer email="you@example.com">your name</maintainer>
+  <license>Apache-2.0</license>
+
+
+  <!-- build dependencies -->
+  <build_depend>rclcpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <!-- runtime / exec dependencies -->
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
